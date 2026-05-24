@@ -1,0 +1,58 @@
+import { useState } from 'react';
+
+import styles from './ItenCounter.module.css';
+// import './itenCounter.css';
+
+interface Props {
+    name: string;
+    quantity?: number;
+};
+
+
+
+export const ItemCounter = ({ name, quantity = 1  }: Props) => {
+
+    const [count, setCount ] = useState(quantity)
+
+    const handleAdd = () => {
+        //console.log('Hola mundo desde ItemCounter');
+        setCount(count + 1);
+    }
+    const handleSubtract = () => {
+        if (count === 1) return;
+
+        setCount(count -1);
+    }
+
+
+//   const handleClick = () => {
+//     console.log(`Click en ${name}`);
+//   }
+  
+  
+    return (
+    <section
+    className={styles.itemRow}
+    // Primera manera de nombrar los estilos
+    // className="item-row"
+    // style={{ 
+    //     display: 'flex',
+    //     alignItems: 'center',
+    //     gap: 10,
+    //     marginTop: 10
+    //  }}
+     >
+        <span
+        className={styles['item-text']}
+        // Primera manera de nombrar los estilos
+        // className="item-text"
+        style={{ 
+            color: count === 1 ? 'red': 'black',
+         }}
+        >{name} </span>
+        <button onClick={handleAdd}>+1</button>
+        <span>{count}</span>
+        <button onClick={handleSubtract}> -1</button>
+    </section>
+  )
+}
